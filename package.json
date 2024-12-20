@@ -1,6 +1,6 @@
 {
-  "name": "interface-template",
-  "version": "1.1.0",
+  "name": "sui-coins-incinerator",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
