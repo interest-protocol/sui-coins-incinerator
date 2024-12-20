@@ -2,9 +2,9 @@ import { Box, Button, Motion, Typography } from '@interest-protocol/ui-kit';
 import { useRouter } from 'next/router';
 import { FC } from 'react';
 
+import { ComputerEyesSVG, DiedComputerSVG } from '@/components/svg';
 import { Network, Routes, RoutesEnum } from '@/constants';
 import { useNetwork } from '@/hooks/use-network';
-import { ComputerEyesSVG, DiedComputerSVG } from '@/svg';
 
 import { ErrorProps } from './error.types';
 
