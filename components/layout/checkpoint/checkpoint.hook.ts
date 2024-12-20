@@ -1,23 +1,19 @@
 import { useSuiClient, useSuiClientContext } from '@mysten/dapp-kit';
 import { useState } from 'react';
 import useSWR from 'swr';
-import { useEventListener } from 'usehooks-ts';
 
-import { makeSWRKey } from '@/utils';
+import useEventListener from '@/hooks/use-event-listener';
 
 const useCheckpoint = () => {
   const suiClient = useSuiClient();
   const { network } = useSuiClientContext();
   const [isOnline, setIsOnline] = useState(false);
 
-  useEventListener<'offline'>('offline', () => setIsOnline(false));
-  useEventListener<'online'>('online', () => setIsOnline(true));
+  useEventListener('offline', () => setIsOnline(false), true);
+  useEventListener('online', () => setIsOnline(true), true);
 
   const { isLoading, data, error } = useSWR(
-    makeSWRKey(
-      [network, isOnline],
-      suiClient.getLatestCheckpointSequenceNumber.name
-    ),
+    [network, isOnline, suiClient.getLatestCheckpointSequenceNumber.name],
     () => suiClient.getLatestCheckpointSequenceNumber(),
     {
       revalidateOnFocus: false,

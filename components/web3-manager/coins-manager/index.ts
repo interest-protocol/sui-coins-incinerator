@@ -11,7 +11,7 @@ import { METADATA } from '@/constants/metadata';
 import { useCoins } from '@/hooks/use-coins';
 import { useNetwork } from '@/hooks/use-network';
 import { CoinMetadataWithType } from '@/interface';
-import { fetchCoinMetadata, isSui, makeSWRKey } from '@/utils';
+import { fetchCoinMetadata, isSui } from '@/utils';
 
 import { CoinsMap } from './coins-manager.types';
 
@@ -19,15 +19,22 @@ const CoinsManager: FC = () => {
   const network = useNetwork();
   const suiClient = useSuiClient();
   const currentAccount = useCurrentAccount();
-  const { id, delay, coinsMap, updateCoins, updateLoading, updateError } =
-    useCoins();
+  const {
+    id,
+    delay,
+    coinsMap,
+    updateCoins,
+    updateLoading,
+    updateError,
+    refresh,
+  } = useCoins();
 
   useEffect(() => {
-    updateCoins({} as CoinsMap);
+    refresh();
   }, [currentAccount]);
 
   useSWR(
-    makeSWRKey([id, network, currentAccount?.address], CoinsManager.name),
+    [id, network, currentAccount?.address, CoinsManager.name],
     async () => {
       try {
         updateError(false);

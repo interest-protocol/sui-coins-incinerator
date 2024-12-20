@@ -3,12 +3,11 @@ import {
   useSuiClient,
   useSuiClientContext,
 } from '@mysten/dapp-kit';
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import useSWR from 'swr';
 
 import { OBJECT_GUARDIANS_BLOCKLIST } from '@/constants';
 import { useObjects } from '@/hooks/use-objects';
-import { makeSWRKey } from '@/utils';
 
 import { ObjectData, TGetAllObjects } from './all-objects.types';
 
@@ -34,14 +33,15 @@ const AllObjectsManager: FC<{ withBlocked?: boolean }> = ({ withBlocked }) => {
   const suiClient = useSuiClient();
   const { network } = useSuiClientContext();
   const currentAccount = useCurrentAccount();
-  const { id, delay, updateAllObjects, updateError, updateLoading } =
+  const { id, delay, updateAllObjects, updateError, updateLoading, refresh } =
     useObjects();
 
+  useEffect(() => {
+    refresh();
+  }, [currentAccount]);
+
   useSWR(
-    makeSWRKey(
-      [id, network, currentAccount?.address],
-      suiClient.getOwnedObjects.name
-    ),
+    [id, network, currentAccount?.address, AllObjectsManager.name],
     async () => {
       try {
         updateError(false);
@@ -49,8 +49,8 @@ const AllObjectsManager: FC<{ withBlocked?: boolean }> = ({ withBlocked }) => {
 
         if (!currentAccount)
           return updateAllObjects({
-            coinsObjects: [],
             ownedNfts: [],
+            coinsObjects: [],
             otherObjects: [],
           });
 

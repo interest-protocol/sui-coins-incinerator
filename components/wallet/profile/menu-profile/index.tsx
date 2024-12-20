@@ -1,10 +1,10 @@
 import { Box, Motion, Theme, useTheme } from '@interest-protocol/ui-kit';
 import { useCurrentAccount, useDisconnectWallet } from '@mysten/dapp-kit';
 import { FC, useState } from 'react';
-import { useEventListener } from 'usehooks-ts';
 import { v4 } from 'uuid';
 
 import { ExplorerMode, wrapperVariants } from '@/constants';
+import useEventListener from '@/hooks/use-event-listener';
 import { useGetExplorerUrl } from '@/hooks/use-get-explorer-url';
 
 import MenuButton from '../../menu-button';
@@ -49,7 +49,7 @@ const MenuProfile: FC<MenuProfileProps> = ({
   const handleSetDesktopView = () =>
     setIsDesktop(window.matchMedia(`(min-width: ${breakpoints[2]})`).matches);
 
-  useEventListener<'resize'>('resize', handleSetDesktopView);
+  useEventListener('resize', handleSetDesktopView, true);
 
   return (
     <Motion

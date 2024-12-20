@@ -18,6 +18,7 @@ const IncineratorTableCheckbox: FC<IncineratorTableColumnAndRowProps> = ({
 
   return (
     <Typography
+      px="m"
       as="td"
       key={v4()}
       size="small"

@@ -18,7 +18,9 @@ const IncineratorTableHeader: FC = () => {
     <Box as="thead">
       <Box as="tr">
         <Typography as="th" size="small" variant="label">
-          <Checkbox label="" defaultValue={checked} onClick={toggleChecked} />
+          <Box px="m">
+            <Checkbox label="" defaultValue={checked} onClick={toggleChecked} />
+          </Box>
         </Typography>
         {TableHeaderData.map((item) => (
           <Typography
