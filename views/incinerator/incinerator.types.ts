@@ -37,6 +37,7 @@ export interface IncineratorTableRowProps
 
 export interface IncineratorTokenObjectProps {
   object: ObjectField;
+  isCalledByModal?: boolean;
 }
 
 export interface IncineratorTableColumnProps
