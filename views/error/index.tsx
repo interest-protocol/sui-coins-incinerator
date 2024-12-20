@@ -3,13 +3,10 @@ import { useRouter } from 'next/router';
 import { FC } from 'react';
 
 import { ComputerEyesSVG, DiedComputerSVG } from '@/components/svg';
-import { Network, Routes, RoutesEnum } from '@/constants';
-import { useNetwork } from '@/hooks/use-network';
 
 import { ErrorProps } from './error.types';
 
-const Error: FC<ErrorProps> = ({ message, linkGoTo }) => {
-  const network = useNetwork();
+const Error: FC<ErrorProps> = ({ message }) => {
   const { push } = useRouter();
 
   return (
@@ -53,13 +50,7 @@ const Error: FC<ErrorProps> = ({ message, linkGoTo }) => {
           mx="auto"
           bg="onSurface"
           variant="filled"
-          onClick={() =>
-            push(
-              linkGoTo || network === Network.MAINNET
-                ? '/'
-                : Routes[RoutesEnum.CreateCoin]
-            )
-          }
+          onClick={() => push('/')}
         >
           Back home!
         </Button>
