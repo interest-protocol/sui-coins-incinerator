@@ -24,7 +24,7 @@ const IncineratorPage: NextPage = () => {
   return (
     <FormProvider {...form}>
       <Layout>
-        <SEO pageTitle="Incinerator" />
+        <SEO />
         <Incinerator />
       </Layout>
     </FormProvider>
