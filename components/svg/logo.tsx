@@ -1,57 +1,36 @@
-import { FC } from 'react';
+import { FC, useId } from 'react';
 
 import { SVGProps } from './svg.types';
 
-const Logo: FC<SVGProps> = ({ maxWidth, maxHeight, ...props }) => (
-  <svg
-    style={{ maxWidth, maxHeight }}
-    viewBox="0 0 417 461"
-    fill="none"
-    {...props}
-  >
-    <path d="M208.5 0V194L0 461L208.5 0Z" fill="#3E415D" />
-    <path d="M208.5 1V194L417 460.785L208.5 1Z" fill="#3E415D" />
-    <rect x="113" y="301" width="193" height="94" fill="#3E415E" />
-    <path
-      d="M209.854 361L306 395.147L209.854 430L113 395.147L209.854 361Z"
-      fill="#3E415E"
-    />
-    <mask
-      id="mask0_2_35"
-      style={{ maskType: 'alpha' }}
-      maskUnits="userSpaceOnUse"
-      x="113"
-      y="330"
-      width="193"
-      height="94"
+const Logo: FC<SVGProps> = ({ maxWidth, maxHeight, ...props }) => {
+  const id = useId();
+
+  return (
+    <svg
+      style={{ maxWidth, maxHeight }}
+      viewBox="0 0 161 161"
+      fill="none"
+      {...props}
     >
-      <rect x="113" y="330" width="193" height="94" fill="#B9B9B9" />
-    </mask>
-    <g mask="url(#mask0_2_35)">
-      <path
-        d="M210 256.5L413.5 329L210 403L5 329L210 256.5Z"
-        fill="url(#paint0_radial_2_35)"
-        fillOpacity="0.2"
-      />
-    </g>
-    <path
-      d="M209.676 245L393 310.324L209.676 377L25 310.324L209.676 245Z"
-      fill="#262736"
-    />
-    <defs>
-      <radialGradient
-        id="paint0_radial_2_35"
-        cx="0"
-        cy="0"
-        r="1"
-        gradientUnits="userSpaceOnUse"
-        gradientTransform="translate(209.25 329.75) rotate(90) scale(73.25 204.25)"
-      >
-        <stop offset="0.338542" />
-        <stop offset="1" stopOpacity="0" />
-      </radialGradient>
-    </defs>
-  </svg>
-);
+      <g clipPath={`url(#clip0_${id})`}>
+        <rect width="160.888" height="161" rx="4" fill="#C53030" />
+        <path
+          fillRule="evenodd"
+          clipRule="evenodd"
+          d="M80.4665 140.875C65.2468 140.875 51.5728 133.013 43.9629 119.891C36.2936 106.768 36.2936 91.1033 43.9629 77.9805L76.067 22.652C78.0289 19.2827 82.904 19.2827 84.8659 22.652L116.97 77.9805C124.58 91.1033 124.58 106.768 116.97 119.891C109.36 133.013 95.6862 140.875 80.4665 140.875ZM81.6748 74.6296C81.2344 73.5124 79.6544 73.5124 79.2141 74.6296L76.008 82.7642C73.5882 88.904 68.7315 93.764 62.596 96.1855L54.4671 99.3938C53.3506 99.8344 53.3506 101.416 54.4671 101.856L62.596 105.064C68.7315 107.486 73.5882 112.346 76.008 118.486L79.2141 126.62C79.6544 127.738 81.2344 127.738 81.6748 126.62L84.8808 118.486C87.3006 112.346 92.1573 107.486 98.2928 105.064L106.422 101.856C107.538 101.416 107.538 99.8344 106.422 99.3938L98.2928 96.1855C92.1573 93.7641 87.3006 88.904 84.8808 82.7642L81.6748 74.6296Z"
+          fill="white"
+        />
+      </g>
+      <defs>
+        <clipPath id={`clip0_${id}`}>
+          <path
+            d="M0 24C0 10.7452 10.7452 0 24 0H137C150.255 0 161 10.7452 161 24V137C161 150.255 150.255 161 137 161H24C10.7452 161 0 150.255 0 137V24Z"
+            fill="white"
+          />
+        </clipPath>
+      </defs>
+    </svg>
+  );
+};
 
 export default Logo;
