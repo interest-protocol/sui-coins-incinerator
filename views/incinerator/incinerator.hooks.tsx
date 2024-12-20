@@ -318,7 +318,7 @@ export const useOnBurn = () => {
                   nHover={{ bg: 'container' }}
                   justifyContent="space-between"
                 >
-                  <IncineratorTokenObject object={object} />
+                  <IncineratorTokenObject object={object} isCalledByModal />
                   <Box textAlign="right">
                     <Typography size="medium" variant="body">
                       {object.value}

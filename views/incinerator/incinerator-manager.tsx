@@ -37,6 +37,8 @@ const IncineratorManager: FC = () => {
     [IncineratorTabEnum.Other]: otherObjects,
   };
 
+  const normalizedSearch = search?.toLowerCase().trim() || '';
+
   const updateAssets = () => {
     if (reset) setValue('reset', false);
 
@@ -46,9 +48,19 @@ const IncineratorManager: FC = () => {
 
     setValue('empty', !displayObjects[tab].length);
 
+    const currentDisplayedObject = displayObjects[tab];
+
     setValue(
       'objects',
-      objectDataToObjectField(displayObjects[tab], coinsMap, checked)
+      objectDataToObjectField(
+        currentDisplayedObject.filter((el) =>
+          normalizedSearch
+            ? el.display?.symbol?.toLowerCase().includes(normalizedSearch)
+            : currentDisplayedObject
+        ),
+        coinsMap,
+        checked
+      )
     );
   };
 

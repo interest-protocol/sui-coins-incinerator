@@ -14,6 +14,7 @@ import { IncineratorTokenObjectProps } from './incinerator.types';
 
 const IncineratorTokenObject: FC<IncineratorTokenObjectProps> = ({
   object,
+  isCalledByModal,
 }) => {
   const { data } = useBlocklist();
   const { display, type, kind } = object;
@@ -42,7 +43,9 @@ const IncineratorTokenObject: FC<IncineratorTokenObjectProps> = ({
       <Box>
         <TooltipWrapper
           fontSize="2xs"
-          maxWidth="20rem"
+          maxWidth={
+            isCalledByModal ? '12rem' : ['15rem', '15rem', '15rem', '18rem']
+          }
           bg="highContainer"
           wordWrap="break-word"
           tooltipPosition="top"
