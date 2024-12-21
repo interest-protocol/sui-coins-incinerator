@@ -18,16 +18,16 @@ importers:
         specifier: 0.3.3-beta
         version: 0.3.3-beta(@types/react@18.3.18)
       '@mysten/dapp-kit':
-        specifier: ^0.14.20
+        specifier: ^0.14.44
         version: 0.14.44(@tanstack/react-query@5.62.8(react@18.3.1))(@types/react-dom@18.3.5(@types/react@18.3.18))(@types/react@18.3.18)(babel-plugin-macros@3.1.0)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(typescript@5.7.2)
       '@mysten/sui':
-        specifier: ^1.9.0
+        specifier: ^1.18.0
         version: 1.18.0(typescript@5.7.2)
       '@mysten/suins':
-        specifier: ^0.4.0
+        specifier: ^0.4.2
         version: 0.4.2(typescript@5.7.2)
       '@mysten/wallet-standard':
-        specifier: ^0.13.4
+        specifier: ^0.13.20
         version: 0.13.20(typescript@5.7.2)
       '@stylin.js/elements':
         specifier: ^1.0.2
