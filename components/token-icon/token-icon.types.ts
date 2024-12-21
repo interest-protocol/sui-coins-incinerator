@@ -11,4 +11,5 @@ export interface TokenIconProps {
   rounded?: boolean;
   url?: string | null;
   loaderSize?: number;
+  defaultIcon?: boolean;
 }

@@ -4,7 +4,7 @@ import {
   SuiTransactionBlockResponseOptions,
 } from '@mysten/sui/client';
 import { Transaction } from '@mysten/sui/transactions';
-import { WalletAccount } from '@wallet-standard/base';
+import { WalletAccount } from '@mysten/wallet-standard';
 
 import { Network } from '@/constants';
 import { CoinMetadataWithType } from '@/interface';

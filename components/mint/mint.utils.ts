@@ -3,7 +3,7 @@ import {
   getFaucetRequestStatus,
   requestSuiFromFaucetV1,
 } from '@mysten/sui/faucet';
-import { WalletAccount } from '@wallet-standard/base';
+import { WalletAccount } from '@mysten/wallet-standard';
 
 const faucetHost = getFaucetHost('testnet');
 
