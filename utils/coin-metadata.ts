@@ -49,9 +49,7 @@ export const fetchCoinMetadata: FetchCoinMetadata = async (args) => {
 
   if (!missingTypes.length) return cachedMetadatas;
 
-  let missingMetadatas = [];
-
-  missingMetadatas = await fetch(
+  const missingMetadatas = await fetch(
     `https://coin-metadata-api-${Network.MAINNET === args.network ? '' : 'testnet-'}production.up.railway.app/api/v1/fetch-coins?coinTypes=${missingTypes}`,
     {
       headers: {
