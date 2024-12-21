@@ -20,7 +20,7 @@ const IncineratorTokenObject: FC<IncineratorTokenObjectProps> = ({
   const { display, type, kind } = object;
   const { network } = useSuiClientContext();
   const displayName = display
-    ? (display as Record<string, string>).name ?? display.symbol ?? type
+    ? ((display as Record<string, string>).name ?? display.symbol ?? type)
     : type;
 
   const { symbol, type: coinType } = (display as CoinObject) ?? {
@@ -39,6 +39,7 @@ const IncineratorTokenObject: FC<IncineratorTokenObjectProps> = ({
         type={coinType}
         symbol={symbol}
         network={network as Network}
+        defaultIcon={kind === 'Other'}
       />
       <Box>
         <TooltipWrapper

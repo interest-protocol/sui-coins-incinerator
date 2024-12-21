@@ -43,6 +43,7 @@ const TokenIcon: FC<TokenIconProps> = ({
   simple,
   network,
   rounded,
+  defaultIcon,
   size = '1.5rem',
   loaderSize = 16,
 }) => {
@@ -57,8 +58,10 @@ const TokenIcon: FC<TokenIconProps> = ({
   const onLoadError = () => setLoadError(true);
 
   const { data: iconSrc, isLoading } = useSWR(
-    `${network}-${type}-${url}`,
+    [network, type, url, defaultIcon],
     async () => {
+      if (defaultIcon) return null;
+
       if (TokenIcon || tokens?.strictTokensMap[type]?.logoUrl)
         return tokens?.strictTokensMap[type].logoUrl ?? null;
 
@@ -77,7 +80,7 @@ const TokenIcon: FC<TokenIconProps> = ({
 
   const ChainIcon = chain ? CHAIN_ICON[chain] : null;
 
-  if (loadError)
+  if (defaultIcon || loadError)
     return (
       <Box
         display="flex"
