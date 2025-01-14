@@ -7,6 +7,7 @@ import { TokenIcon } from '@/components';
 import { BurnSVG } from '@/components/svg';
 import { Network } from '@/constants';
 import { useBlocklist } from '@/hooks/use-blocklist';
+import { useVerifiedDeFiNfts } from '@/hooks/use-verified-defi-nfts';
 import { getSymbolByTag } from '@/utils';
 
 import { CoinObject } from '../../components/web3-manager/coins-manager/coins-manager.types';
@@ -16,9 +17,10 @@ const IncineratorTokenObject: FC<IncineratorTokenObjectProps> = ({
   object,
   isCalledByModal,
 }) => {
-  const { data } = useBlocklist();
+  const { data: scam } = useBlocklist();
   const { display, type, kind } = object;
   const { network } = useSuiClientContext();
+  const { data: verifiedNfts } = useVerifiedDeFiNfts();
   const displayName = display
     ? ((display as Record<string, string>).name ?? display.symbol ?? type)
     : type;
@@ -53,11 +55,12 @@ const IncineratorTokenObject: FC<IncineratorTokenObjectProps> = ({
           tooltipContent={type}
         >
           <Box display="flex" gap="2xs">
-            {data?.includes(kind === 'Coin' ? display!.type : type) && (
-              <Box color="error" width="1rem">
-                <BurnSVG maxHeight="1rem" maxWidth="1rem" width="100%" />
-              </Box>
-            )}
+            {!verifiedNfts?.includes(kind === 'Coin' ? display!.type : type) &&
+              scam?.includes(kind === 'Coin' ? display!.type : type) && (
+                <Box color="error" width="1rem">
+                  <BurnSVG maxHeight="1rem" maxWidth="1rem" width="100%" />
+                </Box>
+              )}
             <Typography
               size="medium"
               variant="body"
