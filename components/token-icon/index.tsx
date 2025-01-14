@@ -18,6 +18,7 @@ import {
 import { Network } from '@/constants';
 import { SUI_BRIDGE_TOKENS, TOKEN_ICONS, WORMHOLE_TOKENS } from '@/constants';
 import { useStrictTokens } from '@/hooks/use-strict-tokens';
+import { useVerifiedDeFiNfts } from '@/hooks/use-verified-defi-nfts';
 import { fetchCoinMetadata } from '@/utils';
 
 import { SVGProps } from '../svg/svg.types';
@@ -54,6 +55,10 @@ const TokenIcon: FC<TokenIconProps> = ({
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState(false);
 
+  const { data: verifiedNfts } = useVerifiedDeFiNfts();
+
+  const isVerified =
+    verifiedNfts?.includes(type) || tokens?.strictTokensMap[type];
   const stopLoading = () => setLoading(false);
   const onLoadError = () => setLoadError(true);
 
@@ -133,7 +138,7 @@ const TokenIcon: FC<TokenIconProps> = ({
             style={{ objectFit: 'cover', position: 'relative' }}
           />
         </Box>
-        {tokens?.strictTokensMap[type] && (
+        {isVerified && (
           <Box
             top="-0.5rem"
             right="-0.25rem"
@@ -182,7 +187,7 @@ const TokenIcon: FC<TokenIconProps> = ({
             maxHeight={size ?? '1.5rem'}
           />
         </Box>
-        {tokens?.strictTokensMap[type] && (
+        {isVerified && (
           <Box
             top="-0.5rem"
             right="-0.25rem"
@@ -249,7 +254,7 @@ const TokenIcon: FC<TokenIconProps> = ({
             onError={onLoadError}
             style={{ objectFit: 'cover', position: 'relative' }}
           />
-          {tokens?.strictTokensMap[type] && (
+          {isVerified && (
             <Box
               top="-0.5rem"
               right="-0.25rem"
@@ -298,7 +303,7 @@ const TokenIcon: FC<TokenIconProps> = ({
             />
           )}
         </Box>
-        {tokens?.strictTokensMap[type] && (
+        {isVerified && (
           <Box
             top="-0.5rem"
             right="-0.25rem"
