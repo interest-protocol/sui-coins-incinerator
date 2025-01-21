@@ -68,6 +68,7 @@ const IncineratorManager: FC = () => {
 
           return (
             el.display?.symbol?.toLowerCase().includes(normalizedSearch) ||
+            el.type?.toLowerCase().includes(normalizedSearch) ||
             metadataName ||
             el.display?.type?.toLowerCase().includes(normalizedSearch) ||
             el.objectId?.toLowerCase().includes(normalizedSearch)
