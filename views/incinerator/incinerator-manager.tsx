@@ -1,4 +1,5 @@
 import { useCurrentAccount } from '@mysten/dapp-kit';
+import { CoinMetadata } from '@mysten/sui/client';
 import { FC, useEffect } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
@@ -53,11 +54,26 @@ const IncineratorManager: FC = () => {
     setValue(
       'objects',
       objectDataToObjectField(
-        currentDisplayedObject.filter((el) =>
-          normalizedSearch
-            ? el.display?.symbol?.toLowerCase().includes(normalizedSearch)
-            : currentDisplayedObject
-        ),
+        currentDisplayedObject.filter((el) => {
+          if (!normalizedSearch) return true;
+
+          const metadata = el.display?.metadata as Omit<
+            CoinMetadata,
+            'symbol' | 'decimals'
+          >;
+
+          const metadataName = metadata?.name
+            ?.toLowerCase()
+            .includes(normalizedSearch);
+
+          return (
+            el.display?.symbol?.toLowerCase().includes(normalizedSearch) ||
+            el.type?.toLowerCase().includes(normalizedSearch) ||
+            metadataName ||
+            el.display?.type?.toLowerCase().includes(normalizedSearch) ||
+            el.objectId?.toLowerCase().includes(normalizedSearch)
+          );
+        }),
         coinsMap,
         checked
       )
