@@ -1,5 +1,6 @@
 import { useCurrentAccount } from '@mysten/dapp-kit';
 import { CoinMetadata } from '@mysten/sui/client';
+import { normalizeSuiAddress } from '@mysten/sui/utils';
 import { FC, useEffect } from 'react';
 import { useFormContext, useWatch } from 'react-hook-form';
 
@@ -69,8 +70,12 @@ const IncineratorManager: FC = () => {
           return (
             el.display?.symbol?.toLowerCase().includes(normalizedSearch) ||
             el.type?.toLowerCase().includes(normalizedSearch) ||
+            normalizeSuiAddress(el.type) ===
+              normalizeSuiAddress(normalizedSearch) ||
             metadataName ||
             el.display?.type?.toLowerCase().includes(normalizedSearch) ||
+            normalizeSuiAddress(el.display?.type || '') ===
+              normalizeSuiAddress(normalizedSearch) ||
             el.objectId?.toLowerCase().includes(normalizedSearch)
           );
         }),
